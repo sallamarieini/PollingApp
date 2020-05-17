@@ -6,4 +6,4 @@ voi asettaa vastausvaihtoehtoja, ja äänestäjä voi äänestää vain yhtä ni
 on mahdollista kirjautua sisään, mikä mahdollistaa sellaisien äänestysten 
 luomisen, joihin tietty henkilö voi vastata vain kerran.
 
-[Tietokantakaavio](/Tietokantakaavio.png)
+[Tietokantakaavio](/documentation/Tietokantakaavio.png)
