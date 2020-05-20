@@ -2,6 +2,8 @@
 
 {% block body %}
   <form method="POST" action="{{ url_for('polls_edit', poll_id=poll.id) }}">
+	<h2>Edit "{{ poll.question }}"</h2>
+	<a href="{{ url_for('single_poll', poll_id=poll.id) }}">Return</a>
     <table>
       <tr>
 	    <td>
@@ -11,10 +13,24 @@
 	      {{ form.question(value=poll.question) }}
 	    </td>
       </tr>
+	  <tr>
+		<td>
+			{{ form.description.label }}
+		</td>
+		<td>
+			{{ form.description(value=poll.description) }}
+		</td>
+	  </tr>
       <tr>
 	    <td colspan="2">
 	      <input type="submit" value="Update poll"/>
 	    </td>
       </tr>
+	</table>
+  </form>
+  <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
+	  <table>
+	  	<input type="submit" value="Delete poll"/>
+	  </table>
   </form>
 {% endblock %}

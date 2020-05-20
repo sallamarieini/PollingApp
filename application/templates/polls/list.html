@@ -4,13 +4,19 @@
   <table>
     <tr>
       <th>Poll</th>
-      <th>Edit</th>
+      <!-- <th>Edit</th> -->
+      <th>Created date</th>
     </tr>
     {% for poll in polls %}
     <tr>
-      <td>{{ poll.question }}</td>
       <td>
+        <a href="{{ url_for('single_poll', poll_id=poll.id) }}"> {{ poll.question }} </a>
+      </td>
+      <!-- <td>
           <a href="{{ url_for('polls_edit', poll_id=poll.id) }}">Edit</a>
+      </td> -->
+      <td>
+        <p>{{ poll.created_date }}</p>
       </td>
     </tr>
     {% endfor %}

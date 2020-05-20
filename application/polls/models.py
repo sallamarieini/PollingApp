@@ -8,11 +8,11 @@ class Poll(db.Model):
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     onupdate = db.func.current_timestamp()
 
-    start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.DateTime)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
 
     creator_id = db.Column(db.Integer)
 
-    def __init__(self, question):
+    def __init__(self, question, description):
         self.question = question
-        # self.description = description
+        self.description = description

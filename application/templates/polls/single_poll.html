@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h2>{{ poll.question }}</h2>
+    <td>
+      <a href="{{ url_for('polls_index') }}">Return</a>
+      <a href="{{ url_for('polls_edit', poll_id=poll.id) }}">Edit</a>
+    </td>
+    <p>Created {{ poll.created_date }}</p>
+    <h3>Poll description</h3>
+    <p> {{ poll.description }} </p>
+    <!-- <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
+      <input type="submit" value="Delete poll"/>
+    </form> -->
+{% endblock %}

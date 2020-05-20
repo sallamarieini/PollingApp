@@ -2,6 +2,7 @@
 
   {% block body %}
   <form method="POST" action="{{ url_for('polls_create') }}">
+	<h2>Create a new poll</h2>
     <table>
       <tr>
 	    <td>
@@ -9,6 +10,14 @@
 	    </td>
 	    <td>
 	      {{ form.question }}
+	    </td>
+      </tr>
+      <tr>
+	    <td>
+	      {{ form.description.label }}
+	    </td>
+	    <td>
+	      {{ form.description }}
 	    </td>
       </tr>
       <tr>
