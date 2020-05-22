@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('create_new_user') }}">
+    <p>If you don't have an account, create a new one.</p>
+    <table>
+        <tr>
+            <td>
+                {{ form.name.label }}
+                {{ form.name }}
+            </td>
+            <td>
+                {% for error in form.name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.newusername.label }}
+                {{ form.newusername }}
+            </td>
+            <td>
+                {% for error in form.newusername.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.newpassword.label }}
+                {{ form.newpassword }}
+            </td>
+            <td>
+                {% for error in form.newpassword.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Create a new user"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
