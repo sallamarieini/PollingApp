@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField
+from wtforms import StringField, SubmitField, validators
 
 
 class PollForm(FlaskForm):
-    question = StringField("Poll question")
-    description = StringField("Description")
+    question = StringField("Poll question", [validators.Length(min=3)])
+    description = StringField("Description", [validators.Optional(strip_whitespace=True)])
     submit = SubmitField("Submit")
 
     class Meta:

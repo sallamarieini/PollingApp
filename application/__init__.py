@@ -36,10 +36,13 @@ login_manager.init_app(app)
 login_manager.login_view = "auth_login"
 login_manager.login_message = "Please login to use this functionality."
 
+app.static_folder = "static"
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
 
 # Creating database tables
 db.create_all()

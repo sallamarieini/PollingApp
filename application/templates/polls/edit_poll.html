@@ -1,36 +1,36 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <form method="POST" action="{{ url_for('polls_edit', poll_id=poll.id) }}">
-	<h2>Edit "{{ poll.question }}"</h2>
-	<a href="{{ url_for('single_poll', poll_id=poll.id) }}">Return</a>
+<form method="POST" action="{{ url_for('polls_edit', poll_id=poll.id) }}">
+    <h2>Edit "{{ poll.question }}"</h2>
+    <a href="{{ url_for('single_poll', poll_id=poll.id) }}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Return</a>
     <table>
-      <tr>
-	    <td>
-	      {{ form.question.label }}
-	    </td>
-	    <td>
-	      {{ form.question(value=poll.question) }}
-	    </td>
-      </tr>
-	  <tr>
-		<td>
-			{{ form.description.label }}
-		</td>
-		<td>
-			{{ form.description(value=poll.description) }}
-		</td>
-	  </tr>
-      <tr>
-	    <td colspan="2">
-	      <input type="submit" value="Update poll"/>
-	    </td>
-      </tr>
-	</table>
-  </form>
-  <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
-	  <table>
-	  	<input type="submit" value="Delete poll"/>
-	  </table>
-  </form>
+        <tr>
+            <td>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
+                {{ form.question.label (class="mdl-textfield__label")}}
+                {{ form.question(value=poll.question, class="mdl-textfield__input")}}
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
+                {{ form.description.label (class="mdl-textfield__label")}}
+				{{ form.description(value=poll.description, class="mdl-textfield__input") }}
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update poll" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
+    <table>
+        <input style="margin-top: 10px" type="submit" value="Delete poll" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"/>
+    </table>
+</form>
 {% endblock %}

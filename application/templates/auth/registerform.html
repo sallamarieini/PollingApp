@@ -6,9 +6,13 @@
     <table>
         <tr>
             <td>
-                {{ form.name.label }}
-                {{ form.name }}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.name.label (class="mdl-textfield__label")}}
+                {{ form.name (class="mdl-textfield__input")}}
+                </div>
             </td>
+        </tr>
+        <tr>
             <td>
                 {% for error in form.name.errors %}
                 <li>{{ error }}</li>
@@ -17,9 +21,13 @@
         </tr>
         <tr>
             <td>
-                {{ form.newusername.label }}
-                {{ form.newusername }}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.newusername.label (class="mdl-textfield__label")}}
+                {{ form.newusername (class="mdl-textfield__input")}}
+                </div>
             </td>
+        </tr>
+        <tr>
             <td>
                 {% for error in form.newusername.errors %}
                 <li>{{ error }}</li>
@@ -28,9 +36,13 @@
         </tr>
         <tr>
             <td>
-                {{ form.newpassword.label }}
-                {{ form.newpassword }}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.newpassword.label (class="mdl-textfield__label")}}
+                {{ form.newpassword (class="mdl-textfield__input")}}
+                </div>
             </td>
+        </tr>
+        <tr>
             <td>
                 {% for error in form.newpassword.errors %}
                 <li>{{ error }}</li>
@@ -40,7 +52,7 @@
 
         <tr>
             <td colspan="2">
-                <input type="submit" value="Create a new user"/>
+                <input type="submit" value="Create a new user" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
             </td>
         </tr>
     </table>

@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>PollingApp</title>
-  </head>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-pink.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
 
-  <body>
-    {% if current_user.is_authenticated %}
-    <p>
-      Logged in as {{ current_user.name }}. <a href="{{ url_for('auth_logout') }}">Logout</a>
-    </p>
-    {% else %}
-    <a href="{{ url_for('auth_login') }}">Login</a>
-    <a href="{{ url_for('auth_form') }}">Create a new user</a>
-    {% endif %}
-
-    <ul>
-      <li><a href="{{ url_for('polls_index') }}">List polls</a></li>
-      <li><a href="{{ url_for('newpolls_form') }}">Add a new poll</a></li>
-    </ul>
-
-    {% block body %}
-      <p>
-        Content.
-      </p>
-    {% endblock %}
-  </body>
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">PollingApp</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                {% if current_user.is_authenticated %}
+                <h6 style="margin-top: auto; margin-bottom: auto">Logged in as {{ current_user.name }}</h6>
+                <a class="mdl-navigation__link" href="{{ url_for('auth_logout') }}">Logout</a>
+                {% else %}
+                <a class="mdl-navigation__link" href="{{ url_for('auth_form') }}">Sign up</a>
+                <a class="mdl-navigation__link" href="{{ url_for('auth_login') }}">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Menu</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="{{ url_for('frontpage') }}">Front page</a>
+            <a class="mdl-navigation__link" href="{{ url_for('polls_index') }}">List of polls</a>
+            <a class="mdl-navigation__link" href="{{ url_for('newpolls_form') }}">Add a new poll</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content"><!-- Your content goes here -->
+            {% block body %}
+            <p>
+                Content.
+            </p>
+            {% endblock %}
+        </div>
+    </main>
+</div>
+</body>
 </html>

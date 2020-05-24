@@ -1,29 +1,43 @@
-  {% extends "layout.html" %}
+{% extends "layout.html" %}
 
-  {% block body %}
-  <form method="POST" action="{{ url_for('polls_create') }}">
-	<h2>Create a new poll</h2>
+{% block body %}
+<form method="POST" action="{{ url_for('polls_create') }}">
+    <h2>Create a new poll</h2>
     <table>
-      <tr>
-	    <td>
-	      {{ form.question.label }}
-	    </td>
-	    <td>
-	      {{ form.question }}
-	    </td>
-      </tr>
-      <tr>
-	    <td>
-	      {{ form.description.label }}
-	    </td>
-	    <td>
-	      {{ form.description }}
-	    </td>
-      </tr>
-      <tr>
-	    <td colspan="2">
-	      <input type="submit" value="Create a new poll"/>
-	    </td>
-      </tr>
-  </form>
-  {% endblock %}
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
+                {{ form.question.label (class="mdl-textfield__label")}}
+                {{ form.question (class="mdl-textfield__input")}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.question.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
+                {{ form.description.label (class="mdl-textfield__label")}}
+                {{ form.description (class="mdl-textfield__input")}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.description.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Create a new poll" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            </td>
+        </tr>
+</form>
+{% endblock %}
