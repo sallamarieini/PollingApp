@@ -1,0 +1,28 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+li {
+    list-style: none
+}
+
+main {
+    margin-top: 30px;
+}
+
+.mdl-layout__drawer .mdl-layout-title{
+    padding: 0;
+    text-align: left;
+}
+
+.mdl-layout__drawer .mdl-navigation__link{
+    padding: 0;
+    text-align: left;
+}
