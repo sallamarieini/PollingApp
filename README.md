@@ -8,6 +8,12 @@ luomisen, joihin tietty henkilö voi vastata vain kerran.
 
 Sovellus herokussa: [https://make-polls-app.herokuapp.com/](https://make-polls-app.herokuapp.com/)
 
+Testitunnuksia Herokussa olevaan sovellukseen:
+| Käyttäjätunnus      | Salasana           |
+| ------------------- |:------------------:| 
+| hello               | hellohello         |
+| testi               | testi1234          |
+
 [Tietokantakaavioon](/documentation/Tietokantakaavio.png)
 
 [User stories](/documentation/UserStories.md)
