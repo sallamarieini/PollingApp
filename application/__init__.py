@@ -4,10 +4,14 @@ app = Flask(__name__)
 
 # Importing SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
-# polls.db is the name of the database
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///polls.db"
-# Asking SQLAlchemy to print all SQL-queries
-app.config["SQLALCHEMY_ECHO"] = True
+
+import os
+
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
+    app.config["SQLALCHEMY_ECHO"] = True
 
 # Creating of db-olio, used for using the database
 db = SQLAlchemy(app)
