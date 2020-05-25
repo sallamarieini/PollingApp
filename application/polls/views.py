@@ -1,8 +1,9 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required
-from application.polls.models import Poll
+from flask_login import login_required, current_user
+from application.polls.models import Poll, AnswerOption
 from application.polls.forms import PollForm, EditPollForm
+from application.auth.models import User
 
 
 @app.route("/")
@@ -29,9 +30,22 @@ def polls_create():
     if not form.validate():
         return render_template("polls/new.html", form=form)
 
-    p = Poll(request.form.get("question"), request.form.get("description"))
+    pquestion = request.form.get("question")
+
+    p = Poll(request.form.get("question"), request.form.get("description"), current_user.id)
 
     db.session().add(p)
+    db.session().commit()
+
+    p_id = Poll.query.filter_by(question=pquestion).first()
+
+    o1 = AnswerOption(request.form.get("option1"), p_id.id)
+    o2 = AnswerOption(request.form.get("option2"), p_id.id)
+    o3 = AnswerOption(request.form.get("option3"), p_id.id)
+
+    db.session().add(o1)
+    db.session().add(o2)
+    db.session().add(o3)
     db.session().commit()
 
     return redirect(url_for("polls_index"))
@@ -57,7 +71,13 @@ def polls_edit(poll_id):
 @app.route("/polls/<poll_id>")
 def single_poll(poll_id):
     poll = Poll.query.get(poll_id)
-    return render_template("polls/single_poll.html", poll=poll)
+    options = AnswerOption.query.filter_by(poll_id=poll_id)
+
+    optionlist = []
+    for o in options:
+        optionlist.append(o.option)
+
+    return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist)
 
 
 @app.route("/polls/delete/<poll_id>", methods=["POST"])
@@ -67,3 +87,10 @@ def delete_poll(poll_id):
     db.session.commit()
 
     return redirect(url_for("polls_index"))
+
+
+@app.route("/polls/<poll_id>/vote", methods=["POST"])
+def vote_on_poll(poll_id):
+    vote = request.form['options']
+    # v = Answer()
+    print(vote.option)
