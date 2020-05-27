@@ -31,7 +31,7 @@ def polls_create():
         return render_template("polls/new.html", form=form)
 
     pquestion = request.form.get("question")
-
+    # 
     p = Poll(request.form.get("question"), request.form.get("description"), current_user.id)
 
     db.session().add(p)
