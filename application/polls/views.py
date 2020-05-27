@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from application.polls.models import Poll, AnswerOption
+from application.polls.models import Poll, AnswerOption, Answer
 from application.polls.forms import PollForm, EditPollForm
 from application.auth.models import User
 
@@ -68,8 +68,22 @@ def polls_edit(poll_id):
     return render_template("polls/edit_poll.html", poll=poll, form=PollForm())
 
 
-@app.route("/polls/<poll_id>")
+@app.route("/polls/<poll_id>", methods=["POST", "GET"])
 def single_poll(poll_id):
+    if request.method == "POST":
+        poll = Poll.query.get(poll_id)
+
+        vote = request.form['options']
+        # v = Answer()
+        answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
+
+        answer = Answer(answer_option_id, poll_id)
+
+        db.session().add(answer)
+        db.session().commit()
+
+        return render_template("polls/thankyou.html", poll=poll)
+
     poll = Poll.query.get(poll_id)
     options = AnswerOption.query.filter_by(poll_id=poll_id)
 
@@ -89,8 +103,16 @@ def delete_poll(poll_id):
     return redirect(url_for("polls_index"))
 
 
-@app.route("/polls/<poll_id>/vote", methods=["POST"])
-def vote_on_poll(poll_id):
-    vote = request.form['options']
-    # v = Answer()
-    print(vote.option)
+# @app.route("/polls/<poll_id>", methods=["POST"])
+# def vote_on_poll(poll_id):
+#     poll = Poll.query.get(poll_id)
+#     vote = request.form['options']
+#     # v = Answer()
+#     answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
+#
+#     answer = Answer(answer_option_id, poll_id)
+#
+#     db.session().add(answer)
+#     db.session().commit()
+#
+#     return render_template()
