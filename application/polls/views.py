@@ -120,9 +120,9 @@ def single_poll(poll_id):
 @app.route("/polls/delete/<poll_id>", methods=["POST"])
 @login_required
 def delete_poll(poll_id):
-    Poll.query.filter_by(id=poll_id).delete()
-    AnswerOption.query.filter_by(poll_id=poll_id).delete()
     Answer.query.filter_by(poll_id=poll_id).delete()
+    AnswerOption.query.filter_by(poll_id=poll_id).delete()
+    Poll.query.filter_by(id=poll_id).delete()
     db.session.commit()
 
     return redirect(url_for("polls_index"))
