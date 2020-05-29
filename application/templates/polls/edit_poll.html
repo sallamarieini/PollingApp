@@ -13,12 +13,81 @@
 				</div>
             </td>
         </tr>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.question.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
         <tr>
             <td>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
                 {{ form.description.label (class="mdl-textfield__label")}}
 				{{ form.description(value=poll.description, class="mdl-textfield__input") }}
 				</div>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.description.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Answer options</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    {{ form.option1.label (class="mdl-textfield__label")}}
+                    {{ form.option1(value=option1, class="mdl-textfield__input") }}
+                </div>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.option1.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    {{ form.option2.label (class="mdl-textfield__label")}}
+                    {{ form.option2(value=option2, class="mdl-textfield__input") }}
+                </div>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.option2.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    {{ form.option3.label (class="mdl-textfield__label")}}
+                    {{ form.option3(value=option3, class="mdl-textfield__input") }}
+                </div>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.option3.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
             </td>
         </tr>
         <tr>

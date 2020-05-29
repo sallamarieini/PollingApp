@@ -31,7 +31,6 @@ def polls_create():
         return render_template("polls/new.html", form=form)
 
     pquestion = request.form.get("question")
-    # 
     p = Poll(request.form.get("question"), request.form.get("description"), current_user.id)
 
     db.session().add(p)
@@ -56,16 +55,40 @@ def polls_create():
 def polls_edit(poll_id):
     poll = Poll.query.get(poll_id)
 
+    options = AnswerOption.query.filter_by(poll_id=poll.id)
+    option1 = options[0].option
+    option2 = options[1].option
+    option3 = options[2].option
+
+    form = PollForm(request.form)
+
     if request.method == "POST":
+        if not form.validate():
+            return render_template("polls/edit_poll.html", poll=poll, form=form, option1=option1, option2=option2,
+                                   option3=option3)
+
         updated_question = request.form.get("question")
         updated_description = request.form.get("description")
+        option1 = request.form.get("option1")
+        option2 = request.form.get("option2")
+        option3 = request.form.get("option3")
+
         poll.question = updated_question
         poll.description = updated_description
-        db.session.commit()
-        # return redirect(url_for("polls_index"))
-        return render_template("polls/single_poll.html", poll=poll)
 
-    return render_template("polls/edit_poll.html", poll=poll, form=PollForm())
+        answer_options = AnswerOption.query.filter_by(poll_id=poll.id)
+        answer_options[0].option = option1
+        answer_options[1].option = option2
+        answer_options[2].option = option3
+
+        db.session.commit()
+
+        new_options = [option1, option2, option3]
+
+        # return redirect(url_for("polls_index"))
+        return render_template("polls/single_poll.html", poll=poll, optionlist=new_options)
+
+    return render_template("polls/edit_poll.html", poll=poll, form=PollForm(), option1=option1, option2=option2, option3=option3)
 
 
 @app.route("/polls/<poll_id>", methods=["POST", "GET"])
@@ -98,6 +121,8 @@ def single_poll(poll_id):
 @login_required
 def delete_poll(poll_id):
     Poll.query.filter_by(id=poll_id).delete()
+    AnswerOption.query.filter_by(poll_id=poll_id).delete()
+    Answer.query.filter_by(poll_id=poll_id).delete()
     db.session.commit()
 
     return redirect(url_for("polls_index"))

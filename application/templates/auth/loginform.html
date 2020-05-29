@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ error }}
 <form method="POST" action="{{ url_for('auth_login') }}">
     <p>If you have an account, please login.</p>
     <table id="list">
@@ -19,6 +18,11 @@
                 {{ form.password.label (class="mdl-textfield__label")}}
                 {{ form.password (class="mdl-textfield__input")}}
                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ error }}
             </td>
         </tr>
         <tr>

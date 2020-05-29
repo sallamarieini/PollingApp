@@ -2,6 +2,8 @@ from application import db
 
 
 class Poll(db.Model):
+    __tablename__ = "poll"
+
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
