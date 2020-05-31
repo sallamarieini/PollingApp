@@ -1,3 +1,5 @@
+from sqlalchemy import text
+
 from application import db
 
 
@@ -37,6 +39,20 @@ class AnswerOption(db.Model):
     def __init__(self, option, poll_id):
         self.option = option
         self.poll_id = poll_id
+
+    @staticmethod
+    def get_results(poll_id):
+        stmt = text("SELECT answer_option.option, COUNT(answer.answer_option_id) FROM answer_option"
+                    " LEFT JOIN answer ON answer.answer_option_id = answer_option.id"
+                    " WHERE answer_option.poll_id = :poll_id"
+                    " GROUP BY answer_option.id").params(poll_id=poll_id)
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"option":row[0], "count":row[1]})
+
+        return response
 
 
 class Answer(db.Model):

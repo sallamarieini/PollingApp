@@ -129,16 +129,9 @@ def delete_poll(poll_id):
     return redirect(url_for("polls_index"))
 
 
-# @app.route("/polls/<poll_id>", methods=["POST"])
-# def vote_on_poll(poll_id):
-#     poll = Poll.query.get(poll_id)
-#     vote = request.form['options']
-#     # v = Answer()
-#     answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
-#
-#     answer = Answer(answer_option_id, poll_id)
-#
-#     db.session().add(answer)
-#     db.session().commit()
-#
-#     return render_template()
+@app.route("/polls/results/<poll_id>")
+@login_required
+def show_results(poll_id):
+    poll = Poll.query.get(poll_id)
+
+    return render_template("polls/results.html", results=AnswerOption.get_results(poll_id=poll_id), poll=poll)
