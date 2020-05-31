@@ -45,7 +45,7 @@ def create_new_user():
     if not form.validate():
         return render_template("auth/registerform.html", form=form)
 
-    pw_hash = bcrypt.generate_password_hash(form.newpassword.data)
+    pw_hash = bcrypt.generate_password_hash(form.newpassword.data).decode('utf-8')
 
     u = User(form.name.data, form.newusername.data, pw_hash)
 
