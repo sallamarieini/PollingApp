@@ -1,6 +1,9 @@
 # Importing flask
 from flask import Flask
+# importing bcrypt
+from flask_bcrypt import Bcrypt
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 # Importing SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy

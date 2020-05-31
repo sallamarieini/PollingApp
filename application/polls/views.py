@@ -88,7 +88,8 @@ def polls_edit(poll_id):
         # return redirect(url_for("polls_index"))
         return render_template("polls/single_poll.html", poll=poll, optionlist=new_options)
 
-    return render_template("polls/edit_poll.html", poll=poll, form=PollForm(), option1=option1, option2=option2, option3=option3)
+    return render_template("polls/edit_poll.html", poll=poll, form=PollForm(), option1=option1, option2=option2,
+                           option3=option3)
 
 
 @app.route("/polls/<poll_id>", methods=["POST", "GET"])
