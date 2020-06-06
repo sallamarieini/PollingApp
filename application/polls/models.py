@@ -3,6 +3,24 @@ from sqlalchemy import text
 from application import db
 
 
+# # table for a many-to-many relationship
+# users_answered = db.Table('users_answered',
+#                           db.Column('poll_id', db.Integer, db.ForeignKey('poll.id')),
+#                           db.Column('user_id', db.Integer, db.ForeignKey('account.id'))
+#                           )
+
+class UsersAnswered(db.Model):
+    __tablename__ = "users_answered"
+
+    id = db.Column(db.Integer, primary_key=True)
+    poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+
+    def __init__(self, poll_id, user_id):
+        self.poll_id = poll_id
+        self.user_id = user_id
+
+
 class Poll(db.Model):
     __tablename__ = "poll"
 
@@ -17,8 +35,11 @@ class Poll(db.Model):
 
     creator_id = db.Column(db.Integer)
 
-    polls = db.relationship("AnswerOption", backref='poll', lazy=True)
-    polls2 = db.relationship("Answer", backref='poll', lazy=True)
+    polls_answer_options = db.relationship("AnswerOption", backref='poll', lazy=True)
+    polls_answer = db.relationship("Answer", backref='poll', lazy=True)
+    # polls_user_answered = db.relationship("User", secondary=users_answered,
+    #                                       backref=db.backref('answered', lazy='dynamic'))
+    polls_user_answered = db.relationship("UsersAnswered", backref='poll', lazy=True)
 
     def __init__(self, question, description, creator_id):
         self.question = question
@@ -50,7 +71,7 @@ class AnswerOption(db.Model):
 
         response = []
         for row in res:
-            response.append({"option":row[0], "count":row[1]})
+            response.append({"option": row[0], "count": row[1]})
 
         return response
 

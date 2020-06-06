@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from application.polls.models import Poll, AnswerOption, Answer
+from application.polls.models import Poll, AnswerOption, Answer, UsersAnswered
 from application.polls.forms import PollForm, EditPollForm
 from application.auth.models import User
 
@@ -62,6 +62,10 @@ def polls_edit(poll_id):
 
     form = PollForm(request.form)
 
+    if poll.creator_id != current_user.id:
+        # this needs a page to inform about an error
+        return
+
     if request.method == "POST":
         if not form.validate():
             return render_template("polls/edit_poll.html", poll=poll, form=form, option1=option1, option2=option2,
@@ -102,8 +106,11 @@ def single_poll(poll_id):
         answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
 
         answer = Answer(answer_option_id, poll_id)
+        # current_user.answered.append(poll)
+        user_answered = UsersAnswered(poll.id, current_user.id)
 
         db.session().add(answer)
+        db.session().add(user_answered)
         db.session().commit()
 
         return render_template("polls/thankyou.html", poll=poll)
@@ -115,7 +122,14 @@ def single_poll(poll_id):
     for o in options:
         optionlist.append(o.option)
 
-    return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist)
+    already_answered = UsersAnswered.query.get(poll.id)
+    already_answered_notify = None
+    if not already_answered:
+        return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist, error=already_answered_notify)
+
+    already_answered_notify = "You have already answered to this poll!"
+
+    return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist, error=already_answered_notify)
 
 
 @app.route("/polls/delete/<poll_id>", methods=["POST"])
@@ -123,6 +137,7 @@ def single_poll(poll_id):
 def delete_poll(poll_id):
     Answer.query.filter_by(poll_id=poll_id).delete()
     AnswerOption.query.filter_by(poll_id=poll_id).delete()
+    UsersAnswered.query.filter_by(poll_id=poll_id).delete()
     Poll.query.filter_by(id=poll_id).delete()
     db.session.commit()
 

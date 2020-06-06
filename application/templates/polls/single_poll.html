@@ -27,12 +27,26 @@
         </td>
     </tr>
     {% endfor %}
+    {% if error == None %}
     <tr>
         <td colspan="2">
-            <input type="submit" value="Vote"
+            <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
         </td>
     </tr>
+    {% else %}
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
+                   class="mdl-button mdl-js-button mdl-button--raised" disabled/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ error }}
+        </td>
+    </tr>
+    {% endif %}
 </table>
 </form>
 </form>
