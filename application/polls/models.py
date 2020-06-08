@@ -27,6 +27,7 @@ class Poll(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
+    anonymous = db.Column(db.Boolean, nullable=False)
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     onupdate = db.func.current_timestamp()
 
@@ -41,9 +42,10 @@ class Poll(db.Model):
     #                                       backref=db.backref('answered', lazy='dynamic'))
     polls_user_answered = db.relationship("UsersAnswered", backref='poll', lazy=True)
 
-    def __init__(self, question, description, creator_id):
+    def __init__(self, question, description, anonymous, creator_id):
         self.question = question
         self.description = description
+        self.anonymous = anonymous
         self.creator_id = creator_id
 
 

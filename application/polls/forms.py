@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators, SelectField
+from wtforms import StringField, SubmitField, validators, BooleanField
 
 
 class PollForm(FlaskForm):
@@ -8,6 +8,7 @@ class PollForm(FlaskForm):
     option1 = StringField("First answer option", [validators.Length(min=1)])
     option2 = StringField("Second answer option", [validators.Length(min=1)])
     option3 = StringField("Third answer option", [validators.Length(min=1)])
+    anonymous = BooleanField("Anonymous poll")
     submit = SubmitField("Submit")
 
     class Meta:

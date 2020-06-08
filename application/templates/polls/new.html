@@ -7,13 +7,13 @@
         <tr>
             <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
-                {{ form.question.label (class="mdl-textfield__label")}}
-                {{ form.question (class="mdl-textfield__input")}}
+                    {{ form.question.label (class="mdl-textfield__label")}}
+                    {{ form.question (class="mdl-textfield__input")}}
                 </div>
             </td>
         </tr>
         <tr>
-			<td>
+            <td>
                 {% for error in form.question.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
@@ -22,13 +22,13 @@
         <tr>
             <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
-                {{ form.description.label (class="mdl-textfield__label")}}
-                {{ form.description (class="mdl-textfield__input")}}
+                    {{ form.description.label (class="mdl-textfield__label")}}
+                    {{ form.description (class="mdl-textfield__input")}}
                 </div>
             </td>
         </tr>
         <tr>
-			<td>
+            <td>
                 {% for error in form.description.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
@@ -42,13 +42,13 @@
         <tr>
             <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                {{ form.option1.label (class="mdl-textfield__label")}}
-                {{ form.option1 (class="mdl-textfield__input")}}
+                    {{ form.option1.label (class="mdl-textfield__label")}}
+                    {{ form.option1 (class="mdl-textfield__input")}}
                 </div>
             </td>
         </tr>
         <tr>
-			<td>
+            <td>
                 {% for error in form.option1.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
@@ -57,13 +57,13 @@
         <tr>
             <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                {{ form.option2.label (class="mdl-textfield__label")}}
-                {{ form.option2 (class="mdl-textfield__input")}}
+                    {{ form.option2.label (class="mdl-textfield__label")}}
+                    {{ form.option2 (class="mdl-textfield__input")}}
                 </div>
             </td>
         </tr>
         <tr>
-			<td>
+            <td>
                 {% for error in form.option2.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
@@ -72,22 +72,35 @@
         <tr>
             <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                {{ form.option3.label (class="mdl-textfield__label")}}
-                {{ form.option3 (class="mdl-textfield__input")}}
+                    {{ form.option3.label (class="mdl-textfield__label")}}
+                    {{ form.option3 (class="mdl-textfield__input")}}
                 </div>
             </td>
         </tr>
         <tr>
-			<td>
+            <td>
                 {% for error in form.option3.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="submit" value="Create a new poll" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            <td>
+                {{ form.anonymous.label }}*
+                {{ form.anonymous }}
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Create a new poll" style="margin-bottom: 20px; margin-top: 20px"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                *If the poll is anonymous, answering is possible without logging in.
+            </td>
+        </tr>
+    </table>
 </form>
 {% endblock %}

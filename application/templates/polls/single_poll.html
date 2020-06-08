@@ -6,10 +6,12 @@
 <td>
     <a href="{{ url_for('polls_index') }}"
        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Return</a>
+    {% if current_user.id == poll.creator_id %}
     <a href="{{ url_for('polls_edit', poll_id=poll.id) }}"
        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit</a>
     <a href="{{ url_for('show_results', poll_id=poll.id) }}"
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Results</a>
+    {% endif %}
 </td>
 <p>Created {{ poll.created_date }}</p>
 <h3>Poll description</h3>
@@ -27,7 +29,26 @@
         </td>
     </tr>
     {% endfor %}
-    {% if error == None %}
+    {% if poll.anonymous == 1 %}
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+        </td>
+    </tr>
+    {% elif poll.anonymous == 0 and not current_user.is_authenticated %}
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
+                   class="mdl-button mdl-js-button mdl-button--raised" disabled/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            You must be logged in to vote on this poll.
+        </td>
+    </tr>
+    {% elif poll.anonymous == 0 and current_user.is_authenticated and error == None %}
     <tr>
         <td colspan="2">
             <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
