@@ -6,7 +6,7 @@ voi asettaa vastausvaihtoehtoja, ja äänestäjä voi äänestää vain yhtä ni
 on mahdollista kirjautua sisään, mikä mahdollistaa sellaisien äänestysten 
 luomisen, joihin tietty henkilö voi vastata vain kerran.
 
-**HUOM!** Sovelluksessa on bugi, joka estää kirjautumatta äänestämisen käsittääkseni aina, kun sitä yrittää. Lisäksi kirjautumista vaativissa kyselyissä voi äänestää vain yksi käyttäjä. Sovellukseen on myös jäänyt tyhmä error viesti, mutta tämä ominaisuus on muutenkin työn alla. Nämä listatut ovat siis tiedossa olevia bugeja, jotka kannattaa huomioida käytössä!
+**HUOM!** Jos mikään vastausvaihtoehdoista ei ole valittuna ja painaa "Vote", niin tulee error.
 
 Sovellus herokussa: [https://make-polls-app.herokuapp.com/](https://make-polls-app.herokuapp.com/)
 
