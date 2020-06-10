@@ -1,6 +1,6 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user
 from application.polls.models import Poll, AnswerOption, Answer, UsersAnswered
 from application.polls.forms import PollForm, EditPollForm
 from application.auth.models import User

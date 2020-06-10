@@ -42,12 +42,24 @@ def auth_form():
 def create_new_user():
     form = NewUserForm(request.form)
 
+    user = User.query.filter_by(username=form.newusername.data).first()
+    if user:
+        return render_template("auth/registerform.html", form=form, error="This username is already taken!")
+
     if not form.validate():
         return render_template("auth/registerform.html", form=form)
 
+    all_users = User.query.all()
+    user_count = len(all_users)
+
+    admin = False
+
+    if user_count == 0:
+        admin = True
+
     pw_hash = bcrypt.generate_password_hash(form.newpassword.data).decode('utf-8')
 
-    u = User(form.name.data, form.newusername.data, pw_hash)
+    u = User(form.name.data, form.newusername.data, pw_hash, admin)
 
     db.session().add(u)
     db.session().commit()
