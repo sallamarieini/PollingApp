@@ -4,6 +4,7 @@
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Poll</th>
+      <th class="mdl-data-table__cell--non-numeric">Voting requires logging in</th>
       <th class="mdl-data-table__cell--non-numeric">Created date</th>
       <th class="mdl-data-table__cell--non-numeric"> </th>
     </tr>
@@ -11,6 +12,13 @@
     <tr>
       <td class="mdl-data-table__cell--non-numeric">
         <a href="{{ url_for('single_poll', poll_id=poll.id) }}"> {{ poll.question }} </a>
+      </td>
+      <td class="mdl-data-table__cell--non-numeric">
+        {% if poll.anonymous == 0 %}
+        Yes
+        {% else %}
+        No
+        {% endif %}
       </td>
       <td class="mdl-data-table__cell--non-numeric">
         {{ poll.created_date }}

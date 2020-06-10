@@ -108,10 +108,14 @@ def single_poll(poll_id):
 
         answer = Answer(answer_option_id, poll_id)
         # current_user.answered.append(poll)
-        user_answered = UsersAnswered(poll.id, current_user.id)
+
+        if current_user.is_authenticated and poll.anonymous == 0:
+            user_answered = UsersAnswered(poll.id, current_user.id)
+            db.session().add(user_answered)
+        # else:
+            # user_answered = UsersAnswered(poll.id, -1)
 
         db.session().add(answer)
-        db.session().add(user_answered)
         db.session().commit()
 
         return render_template("polls/thankyou.html", poll=poll)
@@ -123,15 +127,13 @@ def single_poll(poll_id):
     for o in options:
         optionlist.append(o.option)
 
-    # voting only once while logged in does NOT work
-    # now a poll can only be voted once if any logged in user votes on it (other users can't vote)
-    already_answered_list = UsersAnswered.query.filter_by(poll_id=poll_id).first()
-
-    if not already_answered_list:
-        return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist, error=None)
+    if current_user.is_authenticated:
+        condition = UsersAnswered.query.filter_by(user_id=current_user.id, poll_id=poll.id).first()
+        if not condition:
+            return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist, error=None)
 
     return render_template("polls/single_poll.html", poll=poll, optionlist=optionlist,
-                           error="lol")
+                           error="You have already voted on this poll!")
 
 
 @app.route("/polls/delete/<poll_id>", methods=["POST"])

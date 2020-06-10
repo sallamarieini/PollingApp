@@ -29,7 +29,19 @@
         </td>
     </tr>
     {% endfor %}
-    {% if poll.anonymous == 1 %}
+    {% if current_user.id == poll.creator_id %}
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
+                   class="mdl-button mdl-js-button mdl-button--raised" disabled/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            This poll was created by you. The poll creator cannot vote on the poll.
+        </td>
+    </tr>
+    {% elif poll.anonymous == 1 %}
     <tr>
         <td colspan="2">
             <input type="submit" value="Vote" style="margin-top: 20px; margin-bottom: 20px"
