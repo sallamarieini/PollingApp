@@ -79,13 +79,13 @@ def auth_list():
 @app.route("/auth/delete/<user_id>", methods=["GET", "POST"])
 def auth_delete(user_id):
     # find all polls created by the user
-    polls = Poll.query.filter_by(creator_id=user_id)
+    polls = Poll.query.filter_by(creator_id=user_id).all()
 
     # delete everything that has something to do with polls the user has created
     for poll in polls:
         Answer.query.filter_by(poll_id=poll.id).delete()
         AnswerOption.query.filter_by(poll_id=poll.id).delete()
-        # UsersAnswered.query.filter_by(poll_id=poll.id).delete()
+        UsersAnswered.query.filter_by(poll_id=poll.id).delete()
 
     UsersAnswered.query.filter_by(user_id=user_id).delete()
     # delete poll
