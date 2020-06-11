@@ -85,8 +85,9 @@ def auth_delete(user_id):
     for poll in polls:
         Answer.query.filter_by(poll_id=poll.id).delete()
         AnswerOption.query.filter_by(poll_id=poll.id).delete()
-        UsersAnswered.query.filter_by(poll_id=poll.id).delete()
+        # UsersAnswered.query.filter_by(poll_id=poll.id).delete()
 
+    UsersAnswered.query.filter_by(user_id=user_id).delete()
     # delete poll
     Poll.query.filter_by(creator_id=user_id).delete()
     # delete user
