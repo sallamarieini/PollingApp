@@ -11,10 +11,11 @@ luomisen, joihin tietty henkilö voi vastata vain kerran.
 Sovellus herokussa: [https://make-polls-app.herokuapp.com/](https://make-polls-app.herokuapp.com/)
 
 Testitunnuksia Herokussa olevaan sovellukseen:
-| Käyttäjätunnus      | Salasana           |
-| ------------------- |:------------------:| 
-| hello               | hellohello         |
-| testi               | testi1234          |
+|                     | Käyttäjätunnus      | Salasana           |
+|---------------------| ------------------- |:------------------:| 
+|Tavallinen käyttäjä  | hello               | hellohello         |
+|Tavallinen käyttäjä  | testi               | testi1234          |
+| Admin käyttäjä  | admin               | adminadmin
 
 [Tietokantakaavioon](/documentation/Tietokantakaavio.png)
 
