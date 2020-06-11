@@ -153,4 +153,8 @@ def delete_poll(poll_id):
 def show_results(poll_id):
     poll = Poll.query.get(poll_id)
 
+    if poll.creator_id != current_user.id:
+        # this needs a page to inform about an error
+        return
+
     return render_template("polls/results.html", results=AnswerOption.get_results(poll_id=poll_id), poll=poll)

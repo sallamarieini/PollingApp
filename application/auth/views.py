@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
-from application import app, db, bcrypt
+from application import app, db, bcrypt, login_required
 from application.auth.models import User
+from application.polls.models import Poll, Answer, AnswerOption, UsersAnswered
 from application.auth.forms import LoginForm, NewUserForm
 
 
@@ -39,7 +40,7 @@ def auth_form():
 
 
 @app.route("/auth/", methods=["POST"])
-def create_new_user():
+def auth_create_new_user():
     form = NewUserForm(request.form)
 
     user = User.query.filter_by(username=form.newusername.data).first()
@@ -65,3 +66,32 @@ def create_new_user():
     db.session().commit()
 
     return redirect(url_for("index"))
+
+
+@app.route("/auth/list_users")
+@login_required(role="ADMIN")
+def auth_list():
+    users = User.query.all()
+
+    return render_template("auth/list.html", users=users)
+
+
+@app.route("/auth/delete/<user_id>", methods=["GET", "POST"])
+def auth_delete(user_id):
+    # find all polls created by the user
+    polls = Poll.query.filter_by(creator_id=user_id)
+
+    # delete everything that has something to do with polls the user has created
+    for poll in polls:
+        Answer.query.filter_by(poll_id=poll.id).delete()
+        AnswerOption.query.filter_by(poll_id=poll.id).delete()
+        UsersAnswered.query.filter_by(poll_id=poll.id).delete()
+
+    # delete poll
+    Poll.query.filter_by(creator_id=user_id).delete()
+    # delete user
+    User.query.filter_by(id=user_id).delete()
+
+    db.session.commit()
+
+    return redirect(url_for("auth_list"))

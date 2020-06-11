@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>All accounts</h2>
+{% if current_user.is_authenticated and current_user.roles()==["ADMIN"] %}
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Username</th>
+        <th class="mdl-data-table__cell--non-numeric">Delete account</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            {{ user.username }}
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <form method="POST" action = "{{ url_for('auth_delete', user_id=user.id) }}">
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--accent" value="Delete" />
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

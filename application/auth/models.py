@@ -11,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(144), nullable=False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
 
+    users_polls = db.relationship("Poll", backref='account', lazy=True)
     users_user_answered = db.relationship("UsersAnswered", backref='account', lazy=True)
 
     def __init__(self, name, username, password, admin):
@@ -33,6 +34,6 @@ class User(db.Model):
 
     def roles(self):
         if self.admin:
-            return "ADMIN"
+            return ["ADMIN"]
         else:
-            return "ANY"
+            return ["ANY"]

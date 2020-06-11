@@ -34,7 +34,7 @@ class Poll(db.Model):
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
 
-    creator_id = db.Column(db.Integer)
+    creator_id = db.Column(db.Integer, db.ForeignKey('account.id'))
 
     polls_answer_options = db.relationship("AnswerOption", backref='poll', lazy=True)
     polls_answer = db.relationship("Answer", backref='poll', lazy=True)
