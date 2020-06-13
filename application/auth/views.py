@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from application import app, db, bcrypt, login_required
 from application.auth.models import User
 from application.polls.models import Poll, Answer, AnswerOption, UsersAnswered
-from application.auth.forms import LoginForm, NewUserForm
+from application.auth.forms import LoginForm, NewUserForm, EditUsernameForm, EditPasswordForm
 
 
 @app.route("/auth/login", methods=["GET", "POST"])
@@ -77,6 +77,7 @@ def auth_list():
 
 
 @app.route("/auth/delete/<user_id>", methods=["GET", "POST"])
+@login_required(role="ADMIN")
 def auth_delete(user_id):
     # find all polls created by the user
     polls = Poll.query.filter_by(creator_id=user_id).all()
@@ -87,6 +88,7 @@ def auth_delete(user_id):
         AnswerOption.query.filter_by(poll_id=poll.id).delete()
         UsersAnswered.query.filter_by(poll_id=poll.id).delete()
 
+    # delete all mentions of user from table users_answered
     UsersAnswered.query.filter_by(user_id=user_id).delete()
     # delete poll
     Poll.query.filter_by(creator_id=user_id).delete()
@@ -96,3 +98,70 @@ def auth_delete(user_id):
     db.session.commit()
 
     return redirect(url_for("auth_list"))
+
+
+@app.route("/auth/profile")
+@login_required
+def auth_profile():
+    return render_template("auth/profile.html")
+
+
+@app.route("/auth/edit/username/<user_id>", methods=["POST", "GET"])
+@login_required
+def auth_edit_username(user_id):
+    user = User.query.get(user_id)
+
+    form = EditUsernameForm(request.form)
+
+    if current_user.id != int(user_id):
+        # display error page
+        return render_template("no_access.html")
+
+    if request.method == "POST":
+
+        if not form.validate():
+            return render_template("auth/edit_username.html", user=user, form=form)
+
+        updated_username = request.form.get("username")
+
+        user_check = User.query.filter_by(username=form.username.data).first()
+        if user_check:
+            return render_template("auth/edit_username.html", user=user, form=form,
+                                   error="This username is already taken!")
+
+        user.username = updated_username
+
+        db.session.commit()
+
+        return render_template("auth/profile.html")
+
+    return render_template("auth/edit_username.html", user=user, form=EditUsernameForm())
+
+
+@app.route("/auth/edit/password/<user_id>", methods=["POST", "GET"])
+@login_required
+def auth_edit_password(user_id):
+    user = User.query.get(user_id)
+
+    form = EditPasswordForm(request.form)
+
+    if current_user.id != int(user_id) or current_user.is_authenticated is False:
+        # display error page
+        return render_template("no_access.html")
+
+    if request.method == "POST":
+
+        if not form.validate():
+            return render_template("auth/edit_password.html", user=user, form=form)
+
+        updated_password = request.form.get("password")
+
+        # if len(updated_password) != 0:
+        pw_hash = bcrypt.generate_password_hash(updated_password).decode('utf-8')
+        user.password = pw_hash
+
+        db.session.commit()
+
+        return render_template("auth/profile.html", message="Password changed. You can now use your new password.")
+
+    return render_template("auth/edit_password.html", user=user, form=EditPasswordForm())

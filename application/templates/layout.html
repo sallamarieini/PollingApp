@@ -21,7 +21,7 @@
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 {% if current_user.is_authenticated %}
-                <h6 style="margin-top: auto; margin-bottom: auto">Logged in as {{ current_user.name }}</h6>
+                <h6 style="margin-top: auto; margin-bottom: auto">Logged in as <a href="{{ url_for('auth_profile') }}" style="color: white">{{ current_user.name }}</a></h6>
                 <a class="mdl-navigation__link" href="{{ url_for('auth_logout') }}">Logout</a>
                 {% else %}
                 <a class="mdl-navigation__link" href="{{ url_for('auth_form') }}">Sign up</a>
@@ -38,8 +38,8 @@
             <a class="mdl-navigation__link" href="{{ url_for('newpolls_form') }}">Add a new poll</a>
             {% if current_user.admin == True %}
             <a class="mdl-navigation__link" href="{{ url_for('auth_list') }}">User management</a>
-            {% endif %}
             <a class="mdl-navigation__link" href="">Poll management</a>
+            {% endif %}
         </nav>
     </div>
     <main class="mdl-layout__content">

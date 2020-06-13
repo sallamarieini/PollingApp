@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('auth_edit_username', user_id=user.id) }}">
+    <h2>Change your username, {{ user.name }}</h2>
+    <a href="{{ url_for('auth_profile') }}"
+    class="mdl-button mdl-js-button mdl-js-ripple-effect">Return</a>
+    <table>
+        <tr>
+            <td>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.username.label (class="mdl-textfield__label")}}
+				{{ form.username(value=user.username, class="mdl-textfield__input") }}
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ error }}
+            </td>
+        </tr>
+        <tr>
+			<td>
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

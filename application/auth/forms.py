@@ -19,3 +19,18 @@ class NewUserForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+
+class EditUsernameForm(FlaskForm):
+    username = StringField("New username", [validators.Length(min=3, max=20)])
+
+    class Meta:
+        csrf = False
+
+
+class EditPasswordForm(FlaskForm):
+    password = PasswordField("New password", [validators.Length(min=8, max=20), EqualTo('passwordconfirm', message='Passwords must match!')])
+    passwordconfirm = PasswordField("Repeat new password")
+
+    class Meta:
+        csrf = False

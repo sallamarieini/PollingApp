@@ -1,5 +1,5 @@
 # Importing flask
-from flask import Flask
+from flask import Flask, render_template
 # importing bcrypt
 from flask_bcrypt import Bcrypt
 app = Flask(__name__)
@@ -44,7 +44,8 @@ def login_required(_func=None, *, role="ANY"):
             acceptable_roles = set(("ANY", *current_user.roles()))
 
             if role not in acceptable_roles:
-                return login_manager.unauthorized()
+                # return login_manager.unauthorized()
+                return render_template("no_access.html")
 
             return func(*args, **kwargs)
         return decorated_view

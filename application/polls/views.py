@@ -64,8 +64,8 @@ def polls_edit(poll_id):
     form = PollForm(request.form)
 
     if poll.creator_id != current_user.id:
-        # this needs a page to inform about an error
-        return
+        # show error page
+        return render_template("no_access.html")
 
     if request.method == "POST":
         if not form.validate():
@@ -136,9 +136,15 @@ def single_poll(poll_id):
                            error="You have already voted on this poll!")
 
 
-@app.route("/polls/delete/<poll_id>", methods=["POST"])
+@app.route("/polls/delete/<poll_id>", methods=["POST", "GET"])
 @login_required
 def delete_poll(poll_id):
+    poll = Poll.query.get(poll_id)
+
+    if poll.creator_id != current_user.id:
+        # show error page
+        return render_template("no_access.html")
+
     Answer.query.filter_by(poll_id=poll_id).delete()
     AnswerOption.query.filter_by(poll_id=poll_id).delete()
     UsersAnswered.query.filter_by(poll_id=poll_id).delete()
@@ -154,7 +160,7 @@ def show_results(poll_id):
     poll = Poll.query.get(poll_id)
 
     if poll.creator_id != current_user.id:
-        # this needs a page to inform about an error
-        return
+        # show error page
+        return render_template("no_access.html")
 
     return render_template("polls/results.html", results=AnswerOption.get_results(poll_id=poll_id), poll=poll)

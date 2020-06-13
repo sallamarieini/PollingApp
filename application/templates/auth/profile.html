@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>Account information</h2>
+
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            Name
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            {{ current_user.name }}
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            Username
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            {{ current_user.username }}
+        </td>
+    </tr>
+</table>
+<p style="margin-top: 20px">
+    <a href="{{ url_for('auth_edit_username', user_id=current_user.id) }}"
+    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Change username</a>
+    <a href="{{ url_for('auth_edit_password', user_id=current_user.id) }}"
+    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Change password</a>
+</p>
+<p style="margin-top: 20px">
+    {{ message }}
+</p>
+{% endblock %}
