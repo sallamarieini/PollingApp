@@ -39,16 +39,16 @@
             <a class="mdl-navigation__link" href="{{ url_for('frontpage') }}">Front page</a>
             <a class="mdl-navigation__link" href="{{ url_for('polls_index') }}">List of polls</a>
             <a class="mdl-navigation__link" href="{{ url_for('newpolls_form') }}">Add a new poll</a>
+            {% if current_user.admin == True %}
+            <a class="mdl-navigation__link" href="{{ url_for('auth_list') }}">User management</a>
+            <a class="mdl-navigation__link" href="">Poll management</a>
+            {% endif %}
             {% if current_user.is_authenticated %}
             <a class="mdl-navigation__link" href="{{ url_for('auth_logout') }}" style="color: black">Logout</a>
             {% else %}
             <a class="mdl-navigation__link" href="{{ url_for('auth_form') }}">Sign up</a>
             <a class="mdl-navigation__link" href="{{ url_for('auth_login') }}">Login</a>
-            {% endif %}
-            {% if current_user.admin == True %}
-            <a class="mdl-navigation__link" href="{{ url_for('auth_list') }}">User management</a>
-            <a class="mdl-navigation__link" href="">Poll management</a>
-            {% endif %}
+            {% endif %}}
         </nav>
     </div>
     <main class="mdl-layout__content">
