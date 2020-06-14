@@ -1,4 +1,4 @@
-# Käyttöohje (alustava)
+# Käyttöohje
 
 ## Sovelluksen käyttöönotto
 
@@ -51,14 +51,18 @@ Kyselyn muokkaaminen on mahdollista vain sille käyttäjälle, joka on luonut ky
 
 Poistamistoiminnallisuus löytyy samasta näkymästä kuin kyselyn muokkaaminen. Painike on *Update poll* painikkeen alapuolella. Klikkaamalla painiketta *Delete poll* kysely ja siihen liittyvät muut tallennetut tiedot deletoituvat.
 
-### Tuloksien tarkastelu
+### Tulosten tarkastelu
 
 Tuloksia voi tarkastella vain se käyttäjä, joka on luonut kyselyn. Tuloksia pääsee tarkastelemaan klikkaamalla kyselyn editoimiseen vievän painikkeen viereistä painiketta *Results*.
 
-## Admin-toiminnot (kesken)
+## Admin-toiminnot
 
 Admin-käyttäjällä on lähes samat oikeudet kuin tavallisella käyttäjällä.
 
 ### Käyttäjän poistaminen
 
 Admin käyttäjä kykenee poistamaan käyttäjän kokonaan. Tämän toiminnallisuuden löytää klikkaamalla valikon linkkiä *User management*, joka avaa näkymän, jossa käyttäjät on listattu. Jokaisen käyttäjän vieressä on *Delete* painike, jota klikkaamalla käyttäjä ja kaikki käyttäjään liittyvä tieto (myös käyttäjän luomiin kyselyihin liittyvät tiedot) poistetaan.
+
+### Kyselyn poistaminen
+
+Admin voi poistaa minkä tahansa kyselyn. Syy poistamiseen voi olla esimerkiksi epäasiallinen sisältö. Poistaminen onnistuu painamalla kyselyn äänestyspainikkeen alapuolelta painiketta *Delete poll*.
