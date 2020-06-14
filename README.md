@@ -12,6 +12,16 @@ luomisen, joihin tietty henkilö voi vastata vain kerran. Anonyymien kyselyiden 
 
 Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyttäjä. Tavallinen käyttäjä voi suorittaa kaikki edellä mainitut toiminnot. Admin käyttäjä voi lisäksi poistaa käyttäjiä, ja käyttäjän poistamisen yhteydessä poistuvat myös tämän luomat kyselyt ja niihin liittyvät vastaukset ja vastausvaihtoehdot. Käyttäjät voivat vaihtaa käyttäjätunnusta ja salasanaa.
 
+## Dokumentaatio
+
+[Asennusohje](/documentation/asennusohje.md)
+
+[Alustava käyttöohje](/documentation/kayttoohje.md)
+
+[Tietokantakaavio](/documentation/Tietokantakaavio.png)
+
+[User stories](/documentation/UserStories.md)
+
 ## Sovellus Herokussa
 
 [https://make-polls-app.herokuapp.com/](https://make-polls-app.herokuapp.com/)
@@ -23,12 +33,3 @@ Testitunnuksia Herokussa olevaan sovellukseen:
 |Tavallinen käyttäjä  | testi               | testi1234          |
 | Admin käyttäjä      | admin               | adminadmin         |
 
-## Dokumentaatio
-
-[Asennusohje](/documentation/asennusohje.md)
-
-[Alustava käyttöohje](/documentation/kayttoohje.md)
-
-[Tietokantakaavio](/documentation/Tietokantakaavio.png)
-
-[User stories](/documentation/UserStories.md)
