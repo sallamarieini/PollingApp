@@ -1,5 +1,7 @@
 # Polling App
 
+Sovellus on tehty Helsingin yliopiston [Tietokantasovellus](https://materiaalit.github.io/tsoha-20/)-kurssilla.
+
 ## Aihekuvaus
 
 Sovellus äänestyksiä varten. Kirjautuneena käyttäjänä sovelluksessa voi luoda äänestyksiä. Äänestyksille 
@@ -16,7 +18,7 @@ Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyt
 
 Testitunnuksia Herokussa olevaan sovellukseen:
 |                     | Käyttäjätunnus      | Salasana           |
-|---------------------| ------------------- |:------------------:| 
+|---------------------| ------------------- |--------------------| 
 |Tavallinen käyttäjä  | hello               | hellohello         |
 |Tavallinen käyttäjä  | testi               | testi1234          |
 | Admin käyttäjä      | admin               | adminadmin         |
