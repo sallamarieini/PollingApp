@@ -103,6 +103,7 @@ def single_poll(poll_id):
         poll = Poll.query.get(poll_id)
 
         vote = request.form['options']
+
         # v = Answer()
         answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
 

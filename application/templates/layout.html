@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta charset="utf-8">
     <title>PollingApp</title>
@@ -32,10 +32,19 @@
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Menu</span>
+        {% if current_user.is_authenticated %}
+        <span class="mdl-layout-title" style="font-size: 14px">Logged in as <a href="{{ url_for('auth_profile') }}">{{ current_user.name }}</a></span>
+        {% endif %}
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="{{ url_for('frontpage') }}">Front page</a>
             <a class="mdl-navigation__link" href="{{ url_for('polls_index') }}">List of polls</a>
             <a class="mdl-navigation__link" href="{{ url_for('newpolls_form') }}">Add a new poll</a>
+            {% if current_user.is_authenticated %}
+            <a class="mdl-navigation__link" href="{{ url_for('auth_logout') }}" style="color: black">Logout</a>
+            {% else %}
+            <a class="mdl-navigation__link" href="{{ url_for('auth_form') }}">Sign up</a>
+            <a class="mdl-navigation__link" href="{{ url_for('auth_login') }}">Login</a>
+            {% endif %}
             {% if current_user.admin == True %}
             <a class="mdl-navigation__link" href="{{ url_for('auth_list') }}">User management</a>
             <a class="mdl-navigation__link" href="">Poll management</a>

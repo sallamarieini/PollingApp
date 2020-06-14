@@ -1,7 +1,7 @@
 from sqlalchemy import text
 
 from application import db
-
+# moving classes to different files is under consideration
 
 # # table for a many-to-many relationship
 # users_answered = db.Table('users_answered',
@@ -9,6 +9,8 @@ from application import db
 #                           db.Column('user_id', db.Integer, db.ForeignKey('account.id'))
 #                           )
 
+
+# table for storing information about which polls user has alredy voted on
 class UsersAnswered(db.Model):
     __tablename__ = "users_answered"
 
@@ -21,6 +23,7 @@ class UsersAnswered(db.Model):
         self.user_id = user_id
 
 
+# poll table
 class Poll(db.Model):
     __tablename__ = "poll"
 
@@ -49,6 +52,7 @@ class Poll(db.Model):
         self.creator_id = creator_id
 
 
+# table has answer options for polls
 class AnswerOption(db.Model):
     __tablename__ = "answer_option"
 
@@ -78,6 +82,7 @@ class AnswerOption(db.Model):
         return response
 
 
+# table contains voters voting choices
 class Answer(db.Model):
     __tablename__ = "answer"
 

@@ -3,7 +3,7 @@
 {% block body %}
 <form method="POST" action="{{ url_for('single_poll', poll_id=poll.id) }}">
 <h2>{{ poll.question }}</h2>
-<td>
+<p>
     <a href="{{ url_for('polls_index') }}"
        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Return</a>
     {% if current_user.id == poll.creator_id %}
@@ -12,7 +12,7 @@
     <a href="{{ url_for('show_results', poll_id=poll.id) }}"
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Results</a>
     {% endif %}
-</td>
+</p>
 <p>Created {{ poll.created_date }}</p>
 <h3>Poll description</h3>
 <p> {{ poll.description }} </p>
@@ -23,7 +23,7 @@
     <tr>
         <td>
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{ option }}">
-                <input type="radio" id="{{ option }}" class="mdl-radio__button" name="options" value="{{ option }}">
+                <input type="radio" id="{{ option }}" class="mdl-radio__button" name="options" value="{{ option }}" checked>
                 <span class="mdl-radio__label">{{ option }}</span>
             </label>
         </td>
@@ -77,6 +77,11 @@
     <tr>
         <td>
             {{ error }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ message }}
         </td>
     </tr>
     {% endif %}
