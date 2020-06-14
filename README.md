@@ -16,7 +16,7 @@ Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyt
 
 [Asennusohje](/documentation/asennusohje.md)
 
-[Alustava käyttöohje](/documentation/kayttoohje.md)
+[Käyttöohje](/documentation/kayttoohje.md)
 
 [Tietokantakaavio](/documentation/Tietokantakaavio.png)
 
