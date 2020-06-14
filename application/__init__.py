@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 # importing bcrypt
 from flask_bcrypt import Bcrypt
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
@@ -21,9 +22,11 @@ db = SQLAlchemy(app)
 
 # login
 from os import urandom
+
 app.config["SECRET_KEY"] = urandom(32)
 
 from flask_login import LoginManager, current_user
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -39,7 +42,8 @@ def login_required(_func=None, *, role="ANY"):
         @wraps(func)
         def decorated_view(*args, **kwargs):
             if not (current_user and current_user.is_authenticated):
-                return login_manager.unauthorized()
+                # return login_manager.unauthorized()
+                return render_template("no_access.html")
 
             acceptable_roles = set(("ANY", *current_user.roles()))
 
@@ -48,8 +52,11 @@ def login_required(_func=None, *, role="ANY"):
                 return render_template("no_access.html")
 
             return func(*args, **kwargs)
+
         return decorated_view
+
     return wrapper if _func is None else wrapper(_func)
+
 
 # Importing views
 from application import views
@@ -68,10 +75,14 @@ app.static_folder = "static"
 # login functionality
 from application.auth.models import User
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 
 # Creating database tables
-db.create_all()
+try:
+    db.create_all()
+except:
+    pass

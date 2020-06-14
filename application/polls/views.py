@@ -114,7 +114,7 @@ def single_poll(poll_id):
             user_answered = UsersAnswered(poll.id, current_user.id)
             db.session().add(user_answered)
         # else:
-            # user_answered = UsersAnswered(poll.id, -1)
+        # user_answered = UsersAnswered(poll.id, -1)
 
         db.session().add(answer)
         db.session().commit()
@@ -142,15 +142,18 @@ def single_poll(poll_id):
 def delete_poll(poll_id):
     poll = Poll.query.get(poll_id)
 
-    if poll.creator_id != current_user.id:
-        # show error page
-        return render_template("no_access.html")
+    # if poll.creator_id != current_user.id:
+    #     # show error page
+    #     return render_template("no_access.html")
 
-    Answer.query.filter_by(poll_id=poll_id).delete()
-    AnswerOption.query.filter_by(poll_id=poll_id).delete()
-    UsersAnswered.query.filter_by(poll_id=poll_id).delete()
-    Poll.query.filter_by(id=poll_id).delete()
-    db.session.commit()
+    if int(current_user.id) == int(poll.creator_id) or current_user.admin:
+        Answer.query.filter_by(poll_id=poll_id).delete()
+        AnswerOption.query.filter_by(poll_id=poll_id).delete()
+        UsersAnswered.query.filter_by(poll_id=poll_id).delete()
+        Poll.query.filter_by(id=poll_id).delete()
+        db.session.commit()
+    else:
+        return render_template("no_access.html")
 
     return redirect(url_for("polls_index"))
 

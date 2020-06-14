@@ -88,6 +88,14 @@
 </table>
 </form>
 </form>
+    {% if current_user.admin == True %}
+    <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
+        <table>
+            <input style="margin-top: 10px" type="submit" value="Delete poll"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"/>
+        </table>
+    </form>
+    {% endif %}
 <!-- <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
   <input type="submit" value="Delete poll"/>
 </form> -->
