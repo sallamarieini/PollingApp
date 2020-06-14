@@ -27,6 +27,8 @@ Testitunnuksia Herokussa olevaan sovellukseen:
 
 [Asennusohje](/documentation/asennusohje.md)
 
+[Alustava käyttöohje](/documentation/kayttoohje.md)
+
 [Tietokantakaavio](/documentation/Tietokantakaavio.png)
 
 [User stories](/documentation/UserStories.md)
