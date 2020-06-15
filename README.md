@@ -18,7 +18,7 @@ Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyt
 
 [Käyttöohje](/documentation/kayttoohje.md)
 
-[Tietokantakaavio](/documentation/Tietokantakaavio.png)
+[Tietokantakaavio](/documentation/Tietokantakaavio.png) (**HUOM!** Tietokantakaavio päivitetään lopulta vastaamaan lopullista sovellusta!)
 
 [User stories](/documentation/UserStories.md)
 
