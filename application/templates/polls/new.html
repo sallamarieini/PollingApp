@@ -21,6 +21,11 @@
         </tr>
         <tr>
             <td>
+                {{message}}
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 600px">
                     {{ form.description.label (class="mdl-textfield__label")}}
                     {{ form.description (class="mdl-textfield__input")}}
@@ -99,6 +104,7 @@
         <tr>
             <td>
                 *If the poll is anonymous, voting is possible without logging in and same person may vote multiple times.
+                You cannot change this later.
             </td>
         </tr>
     </table>

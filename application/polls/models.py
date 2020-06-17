@@ -30,7 +30,7 @@ class Poll(db.Model):
     __tablename__ = "poll"
 
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String, nullable=False)
+    question = db.Column(db.String, nullable=False, unique=True)
     description = db.Column(db.String)
     anonymous = db.Column(db.Boolean, nullable=False)
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())

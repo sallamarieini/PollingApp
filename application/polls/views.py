@@ -43,6 +43,12 @@ def polls_create():
         return render_template("polls/new.html", form=form)
 
     pquestion = request.form.get("question")
+    poll = Poll.query.filter_by(question=pquestion).first()
+
+    if poll:
+        return render_template("polls/new.html", form=form, message="There is a poll with this question already."
+                                                                    " Please choose another question.")
+
     p = Poll(request.form.get("question"), request.form.get("description"), form.anonymous.data,
              current_user.id)
 
