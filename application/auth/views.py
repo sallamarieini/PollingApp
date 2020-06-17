@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, current_user
-from application import app, db, bcrypt, login_required
+from application import app, db, bcrypt, login_required, PER_PAGE
 from application.auth.models import User
 from application.polls.models import Poll, Answer, AnswerOption, UsersAnswered
 from application.auth.forms import LoginForm, NewUserForm, EditUsernameForm, EditPasswordForm
@@ -71,9 +71,16 @@ def auth_create_new_user():
 @app.route("/auth/list_users")
 @login_required(role="ADMIN")
 def auth_list():
-    users = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    users = User.query.paginate(page, PER_PAGE, False)
+    # users = User.query.all()
 
-    return render_template("auth/list.html", users=users)
+    next_url = url_for('auth_list', page=users.next_num) \
+        if users.has_next else None
+    prev_url = url_for('auth_list', page=users.prev_num) \
+        if users.has_prev else None
+
+    return render_template("auth/list.html", users=users.items, next_url=next_url, prev_url=prev_url)
 
 
 @app.route("/auth/delete/<user_id>", methods=["GET", "POST"])

@@ -1,4 +1,4 @@
-from application import app, db, login_required
+from application import app, db, login_required, PER_PAGE
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user
 from application.polls.models import Poll, AnswerOption, Answer, UsersAnswered
@@ -13,7 +13,16 @@ def frontpage():
 
 @app.route("/polls", methods=["GET"])
 def polls_index():
-    return render_template("polls/list.html", polls=Poll.query.all(), word=None)
+    page = request.args.get('page', 1, type=int)
+    polls = Poll.query.paginate(page, PER_PAGE, False)
+    # polls = Poll.query.all()
+
+    next_url = url_for('polls_index', page=polls.next_num) \
+        if polls.has_next else None
+    prev_url = url_for('polls_index', page=polls.prev_num) \
+        if polls.has_prev else None
+
+    return render_template("polls/list.html", polls=polls.items, word=None, next_url=next_url, prev_url=prev_url)
 
 
 @app.route("/polls/new")
@@ -183,8 +192,7 @@ def polls_search_results():
         return render_template("polls/search.html", form=form)
 
     search_word = request.form.get("question")
-    print("%" + search_word + "%")
-    print("............................................")
+
     results = Poll.find_poll_by_question("%" + search_word + "%")
 
     if not results:

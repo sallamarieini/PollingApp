@@ -14,12 +14,20 @@
             {{ user.username }}
         </td>
         <td class="mdl-data-table__cell--non-numeric">
-            <form method="POST" action = "{{ url_for('auth_delete', user_id=user.id) }}">
-                <input type="submit" class="mdl-button mdl-js-button mdl-button--accent" value="Delete" />
+            <form method="POST" action="{{ url_for('auth_delete', user_id=user.id) }}">
+                <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Delete"/>
             </form>
         </td>
     </tr>
     {% endfor %}
 </table>
+<div style="margin-top: 10px">
+    {% if prev_url %}
+    <a href="{{ prev_url }}" class="mdl-button mdl-js-button mdl-button--accent">Previous page</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}" class="mdl-button mdl-js-button mdl-button--accent">Next page</a>
+    {% endif %}
+</div>
 {% endif %}
 {% endblock %}

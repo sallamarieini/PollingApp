@@ -6,6 +6,9 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+# for pagination
+PER_PAGE = 10
+
 # Importing SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
