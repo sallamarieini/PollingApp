@@ -53,6 +53,7 @@ class Poll(db.Model):
         self.anonymous = anonymous
         self.creator_id = creator_id
 
+    @staticmethod
     def find_poll_by_question(poll_question):
         stmt = text("SELECT *"
                     " FROM poll"

@@ -1,19 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
-<h2>Results for "{{ poll.question }}"</h2>
-<a href="{{ url_for('single_poll', poll_id=poll.id) }}"
-   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Return</a>
+<h2>User activity</h2>
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-top: 20px">
   <tr>
-    <th class="mdl-data-table__cell--non-numeric">Option</th>
-    <th class="mdl-data-table__cell--non-numeric">Vote count</th>
+    <th class="mdl-data-table__cell--non-numeric">Username</th>
+    <th class="mdl-data-table__cell--non-numeric">Polls voted</th>
   </tr>
   {% for result in results %}
   <tr>
     <td class="mdl-data-table__cell--non-numeric">
-      {{result.option}}
+      {{result.username}}
     </td>
     <td class="mdl-data-table__cell--non-numeric">
       {{result.count}}
@@ -21,5 +18,4 @@
   </tr>
   {% endfor %}
 </table>
-
 {% endblock %}

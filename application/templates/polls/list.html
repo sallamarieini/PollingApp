@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{{message}}
 {% if word != None %}
 <h2>Search results for "{{ word }}"</h2>
 {% endif %}
-<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin-top: 10px">
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Poll</th>
         <th class="mdl-data-table__cell--non-numeric">Voting requires logging in</th>

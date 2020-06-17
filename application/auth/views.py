@@ -172,3 +172,11 @@ def auth_edit_password(user_id):
         return render_template("auth/profile.html", message="Password changed. You can now use your new password.")
 
     return render_template("auth/edit_password.html", user=user, form=EditPasswordForm())
+
+
+@app.route("/auth/user_activity")
+@login_required(role="ADMIN")
+def auth_user_activity():
+    results = User.get_voting_activity()
+
+    return render_template("auth/user_activity.html", results=results)

@@ -22,6 +22,9 @@ def polls_index():
     prev_url = url_for('polls_index', page=polls.prev_num) \
         if polls.has_prev else None
 
+    if len(polls.items) == 0:
+        return render_template("polls/list.html", message="There seems to be no polls. Please create a poll.", word=None)
+
     return render_template("polls/list.html", polls=polls.items, word=None, next_url=next_url, prev_url=prev_url)
 
 

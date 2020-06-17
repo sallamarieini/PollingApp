@@ -1,3 +1,5 @@
+from sqlalchemy import text
+
 from application import db
 
 
@@ -37,3 +39,17 @@ class User(db.Model):
             return ["ADMIN"]
         else:
             return ["ANY"]
+
+    @staticmethod
+    def get_voting_activity():
+        stmt = text("SELECT account.username, COUNT(users_answered.user_id)"
+                    " FROM account"
+                    " LEFT JOIN users_answered ON users_answered.user_id = account.id"
+                    " GROUP BY account.id")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"username": row[0], "count": row[1]})
+
+        return response
