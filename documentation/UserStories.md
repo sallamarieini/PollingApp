@@ -1,10 +1,47 @@
 # User stories
 
-**User story 1:** Tavallisena käyttäjänä haluan vastata kyselyyn.
+### Tavallisena käyttäjänä haluan vastata kyselyyn.
+    INSERT INTO answer (answer_option_id, poll_id, date) 
+    VALUES (?, ?, ?);
+    
+    INSERT INTO users_answered (poll_id, user_id) 
+    VALUES (?, ?);
+    
+Edellisistä kyselyistä ensimmäiseen *answer_option_id* saadaan kyselyllä
 
-**User story 2:** Tavallisena käyttäjänä haluan, että minuun ei voi yhdistää, mitä vaihtoehtoa äänestin tietyssä kyselyssä sellaisessa tapauksessa, jossa kyselyyn vastaaminen edellyttää tunnistautumista.
+    SELECT answer_option.id 
+    FROM answer_option 
+    WHERE answer_option.poll_id = ? AND answer_option.option = ? 
+    LIMIT 1;
+    
+### Tavallisena käyttäjänä haluan, että minuun ei voi yhdistää, mitä vaihtoehtoa äänestin.
+Tässä tapauksessa tieto äänestä lisätään niin, että tietty käyttäjä yhdistetään kyselyyn, johon tämä vastasi, eikä valittuun vastausvaihtoehtoon. Kyselyissä, joissa kirjautumista ei vaadita, tätä tietoa ei talleteta ollenkaan.
+    
+    INSERT INTO users_answered (poll_id, user_id) 
+    VALUES (?, ?);
 
-**User story 3:** Tavallisena käyttäjänä haluan, että voin luoda kyselyn.
+### Tavallisena käyttäjänä haluan, että voin luoda kyselyn.
+Ensin tarkistetaan, että ei jo ole saman nimistä kyselyä
+
+    SELECT poll.question 
+    FROM poll 
+    WHERE poll.question = ? 
+    LIMIT 1;
+    
+Jos ei ole, kysely lisätään tietokantaan
+
+    INSERT INTO poll (question, description, anonymous, created_date, creator_id)
+    VALUES (?, ?, ?, ?, ?);
+    
+Lisätään myös vastausvaihtoehdot tietokantaan. Haetaan ensin luodun kyselyn id
+
+    SELECT poll.id
+    FROM poll
+    WHERE poll.question = ?
+    LIMIT 1;
+    
+    INSERT INTO answer_option (option, poll_id)
+    VALUES (?, ?);
 
 **User story 4:** Tavallisena käyttäjä haluan, että voin muokata luomaani kyselyä.
 
