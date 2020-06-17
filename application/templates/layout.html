@@ -39,6 +39,7 @@
             <a class="mdl-navigation__link" href="{{ url_for('frontpage') }}">Front page</a>
             <a class="mdl-navigation__link" href="{{ url_for('polls_index') }}">List of polls</a>
             <a class="mdl-navigation__link" href="{{ url_for('newpolls_form') }}">Add a new poll</a>
+            <a class="mdl-navigation__link" href="{{ url_for('polls_search') }}">Search</a>
             {% if current_user.admin == True %}
             <a class="mdl-navigation__link" href="{{ url_for('auth_list') }}">User management</a>
             {% endif %}

@@ -2,7 +2,7 @@ from application import app, db, login_required
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user
 from application.polls.models import Poll, AnswerOption, Answer, UsersAnswered
-from application.polls.forms import PollForm, EditPollForm
+from application.polls.forms import PollForm, EditPollForm, SearchForm
 from application.auth.models import User
 
 
@@ -13,7 +13,7 @@ def frontpage():
 
 @app.route("/polls", methods=["GET"])
 def polls_index():
-    return render_template("polls/list.html", polls=Poll.query.all())
+    return render_template("polls/list.html", polls=Poll.query.all(), word=None)
 
 
 @app.route("/polls/new")
@@ -168,3 +168,30 @@ def show_results(poll_id):
         return render_template("no_access.html")
 
     return render_template("polls/results.html", results=AnswerOption.get_results(poll_id=poll_id), poll=poll)
+
+
+@app.route("/polls/search")
+def polls_search():
+    return render_template("polls/search.html", form=SearchForm())
+
+
+@app.route("/polls/search_results", methods=["POST", "GET"])
+def polls_search_results():
+    form = SearchForm(request.form)
+
+    if not form.validate():
+        return render_template("polls/search.html", form=form)
+
+    search_word = request.form.get("question")
+    print("%" + search_word + "%")
+    print("............................................")
+    results = Poll.find_poll_by_question("%" + search_word + "%")
+
+    if not results:
+        return render_template("polls/search.html", form=form, message="No results were found.")
+
+    # polls = []
+    # for poll_id in results:
+    #     polls.append(Poll.query.get(poll_id))
+
+    return render_template("polls/list.html", polls=results, word=search_word)

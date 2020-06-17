@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if word != None %}
+<h2>Search results for "{{ word }}"</h2>
+{% endif %}
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Poll</th>

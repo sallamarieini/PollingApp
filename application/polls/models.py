@@ -1,6 +1,8 @@
 from sqlalchemy import text
 
 from application import db
+
+
 # moving classes to different files is under consideration
 
 # # table for a many-to-many relationship
@@ -50,6 +52,19 @@ class Poll(db.Model):
         self.description = description
         self.anonymous = anonymous
         self.creator_id = creator_id
+
+    def find_poll_by_question(poll_question):
+        stmt = text("SELECT *"
+                    " FROM poll"
+                    " WHERE poll.question LIKE :poll_question").params(poll_question=poll_question)
+        res = db.engine.execute(stmt)
+
+        # response = []
+        # for row in res:
+        #     response.append({"question": row[0], "anonymous": row[1]})
+        #
+        # return response
+        return res
 
 
 # table has answer options for polls

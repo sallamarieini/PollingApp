@@ -42,8 +42,7 @@ def login_required(_func=None, *, role="ANY"):
         @wraps(func)
         def decorated_view(*args, **kwargs):
             if not (current_user and current_user.is_authenticated):
-                # return login_manager.unauthorized()
-                return render_template("no_access.html")
+                return login_manager.unauthorized()
 
             acceptable_roles = set(("ANY", *current_user.roles()))
 

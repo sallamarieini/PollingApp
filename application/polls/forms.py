@@ -21,3 +21,10 @@ class EditPollForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+
+class SearchForm(FlaskForm):
+    question = StringField("Search by question", [validators.Length(min=1, max=150)])
+
+    class Meta:
+        csrf = False
