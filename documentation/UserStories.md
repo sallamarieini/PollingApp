@@ -1,6 +1,6 @@
 # User stories
 
-### Tavallisena käyttäjänä haluan vastata kyselyyn.
+## Tavallisena käyttäjänä haluan vastata kyselyyn.
     INSERT INTO answer (answer_option_id, poll_id, date) 
     VALUES (?, ?, ?);
     
@@ -14,13 +14,13 @@ Edellisistä kyselyistä ensimmäiseen *answer_option_id* saadaan kyselyllä
     WHERE answer_option.poll_id = ? AND answer_option.option = ? 
     LIMIT 1;
     
-### Tavallisena käyttäjänä haluan, että minuun ei voi yhdistää, mitä vaihtoehtoa äänestin.
+## Tavallisena käyttäjänä haluan, että minuun ei voi yhdistää, mitä vaihtoehtoa äänestin.
 Tässä tapauksessa tieto äänestä lisätään niin, että tietty käyttäjä yhdistetään kyselyyn, johon tämä vastasi, eikä valittuun vastausvaihtoehtoon. Kyselyissä, joissa kirjautumista ei vaadita, tätä tietoa ei talleteta ollenkaan.
     
     INSERT INTO users_answered (poll_id, user_id) 
     VALUES (?, ?);
 
-### Tavallisena käyttäjänä haluan, että voin luoda kyselyn.
+## Tavallisena käyttäjänä haluan, että voin luoda kyselyn.
 Ensin tarkistetaan, että ei jo ole saman nimistä kyselyä
 
     SELECT poll.question 
