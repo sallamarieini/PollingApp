@@ -39,7 +39,7 @@ Kyselyn luominen tapahtuu klikkaamalla valikosta linkkiä *Add a new poll*. Avau
 
 ### Kyselyssä äänestäminen
 
-Voit tarkastella kyselyitä klikkaamalla valikosta linkkiä *List of polls*, joka avaa sivun, jossa kaikki kyselyt on listattu. Kyselyt on taulukoitu, ja ensimmäisessä sarakkeessa on kyselyn kysymys, joka on linkki, jota klikkaamalla pääsee tarkastelemaan kyseistä kyselyä. Seuraava sarake kertoo, vaatiiko kyselyssä äänestäminen sisäänkirjautumisen vai ei. Kolmannessa sarakkeessa näkyy kyselyn luontihetki, ja viimeisestä sarakkeesta näet, mitkä kyselyt ovat sinun luomiasi (olettaen, että olet kirjautunut sisään).
+Voit tarkastella kyselyitä klikkaamalla valikosta linkkiä *List of polls*, joka avaa sivun, jossa kaikki kyselyt on listattu. Kyselyt on taulukoitu, ja ensimmäisessä sarakkeessa on kyselyn kysymys, joka on linkki, jota klikkaamalla pääsee tarkastelemaan kyseistä kyselyä. Seuraava sarake kertoo, vaatiiko kyselyssä äänestäminen sisäänkirjautumisen vai ei. Kolmannessa sarakkeessa näkyy kyselyn luontihetki, ja viimeisestä sarakkeesta näet, mitkä kyselyt ovat sinun luomiasi (olettaen, että olet kirjautunut sisään). Jos kyselyjä on yli 10, kyselyt listautuvat eri sivuille, joiden välillä pääsee liikkumaan taulukon alapuolella olevista painikkeista klikkaamalla.
 
 Varsinainen äänestäminen tapahtuu avaamalla kysely ensimmäisen sarakkeen linkkiä painamalla ja valitsemalla sopivan vastausvaihtoehdon ja sen jälkeen painamalla *Vote* painiketta. Oletuksena viimeinen vaihtoehto on valittuna, mutta vaihtoehdon vaihtaminen onnistuu yksinkertaisesti valitsemalla jokin toinen annetusta vaihtoehdoista. Kyselyn luoja ei pysty äänestämään omassa kyselyssä.
 
@@ -55,6 +55,10 @@ Poistamistoiminnallisuus löytyy samasta näkymästä kuin kyselyn muokkaaminen.
 
 Tuloksia voi tarkastella vain se käyttäjä, joka on luonut kyselyn. Tuloksia pääsee tarkastelemaan klikkaamalla kyselyn editoimiseen vievän painikkeen viereistä painiketta *Results*.
 
+### Kyselyiden etsiminen hakutoiminnolla
+
+Kyselyitä voi etsiä hakutoiminnon avulla. Haku löytyy valikon linkin *Search* takaa. Esille tulevaan kenttään voi kirjoittaa hakusanan, ja haku etsii kyselyitä sen perusteella, esiintyykö hakusana kyselyn kysymyksessä.
+
 ## Admin-toiminnot
 
 Admin-käyttäjällä on lähes samat oikeudet kuin tavallisella käyttäjällä.
@@ -66,3 +70,7 @@ Admin käyttäjä kykenee poistamaan käyttäjän kokonaan. Tämän toiminnallis
 ### Kyselyn poistaminen
 
 Admin voi poistaa minkä tahansa kyselyn. Syy poistamiseen voi olla esimerkiksi epäasiallinen sisältö. Poistaminen onnistuu painamalla kyselyn äänestyspainikkeen alapuolelta painiketta *Delete poll*.
+
+### Käyttäjien aktiivisuuden tarkasteleminen
+
+Admin voi tarkastella käyttäjien aktiivisuutta kyselyihin vastaamisen suhteen siirtymällä valikosta *User activity* sivulle. Tätä tietoa voisi tulevaisuudessa hyödyntää esimerkiksi admin-oikeuksien myöntämisessä muille käyttäjille, katso [kehitysehdotukset]().
