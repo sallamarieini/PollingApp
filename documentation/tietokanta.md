@@ -76,4 +76,4 @@ Pääavaimissa on automaattisesti indeksöinti. Lisäksi indeksointi lisätään
 
 ## Tietokantakaavio
 
-![Tietokantakaavio](/documentation/Tietokantakaavio.png)
+![Tietokantakaavio](/documentation/Dbdiagram.png)
