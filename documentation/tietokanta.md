@@ -1,8 +1,10 @@
 # Tietokanta
 
-En kokenut tarvetta tehdä abstraktia luokkaa tietokannalle, sillä vain kunkin taulun id toistuu kaikissa tauluissa.
+Paikallisesti sovelluksessa on käytössä SQLite-tietokantahallintajärjestelmä ja Herokussa PostgreSQL.
 
 ## CREATE TABLE-lauseet
+
+En kokenut tarvetta tehdä abstraktia luokkaa tietokannalle, sillä vain kunkin taulun id toistuu kaikissa tauluissa.
 
 ### poll
 Taulu *poll* sisältää kyselyn kysymyksen, kuvauksen, tiedon kyselyn anonyymiydestä, luomispäivämäärän sekä kyselyn luojan id:n.
@@ -82,5 +84,7 @@ Pääavaimissa on automaattisesti indeksöinti. Lisäksi indeksointi lisätään
     CREATE INDEX ix_answer_answer_option_id ON answer (answer_option_id);
 
 ## Tietokantakaavio
+
+Viiteavaimet on korostettu vaaleansinisellä värillä. Pääavaimet on tummennettu.
 
 ![Tietokantakaavio](/documentation/Dbdiagram.png)
