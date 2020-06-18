@@ -14,6 +14,12 @@ Sovellus on toteutettu Python-kielellä Flaskia käyttäen. Muotoilussa on hyöd
 * Admin-käytäjä voi poistaa käyttäjiä ja kyselyitä sekä tarkastella käyttäjien aktiivisuutta
 * Kyselyiden etsiminen hakusanalla
 
+## Käyttäjäryhmät
+
+Sovelluksessa on kaksi käyttäjäryhmää:
+* tavallinen käyttäjä
+* admin-käyttäjä
+
 ## Puutteet ja rajoitteet
 
 ### Kyselyt
