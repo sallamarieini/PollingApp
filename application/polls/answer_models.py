@@ -9,7 +9,7 @@ class AnswerOption(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     option = db.Column(db.String, nullable=False)
-    poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False)
+    poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False, index=True)
 
     answer_options = db.relationship("Answer", backref='answer_option', lazy=True)
 
@@ -37,8 +37,8 @@ class Answer(db.Model):
     __tablename__ = "answer"
 
     id = db.Column(db.Integer, primary_key=True)
-    answer_option_id = db.Column(db.Integer, db.ForeignKey('answer_option.id'), nullable=False)
-    poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False)
+    answer_option_id = db.Column(db.Integer, db.ForeignKey('answer_option.id'), nullable=False, index=True)
+    poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False, index=True)
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
     def __init__(self, answer_option_id, poll_id):
