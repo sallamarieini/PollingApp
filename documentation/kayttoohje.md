@@ -73,4 +73,4 @@ Admin voi poistaa minkä tahansa kyselyn. Syy poistamiseen voi olla esimerkiksi 
 
 ### Käyttäjien aktiivisuuden tarkasteleminen
 
-Admin voi tarkastella käyttäjien aktiivisuutta kyselyihin vastaamisen suhteen siirtymällä valikosta *User activity* sivulle. Tätä tietoa voisi tulevaisuudessa hyödyntää esimerkiksi admin-oikeuksien myöntämisessä muille käyttäjille, katso [kehitysehdotukset]().
+Admin voi tarkastella käyttäjien aktiivisuutta kyselyihin vastaamisen suhteen siirtymällä valikosta *User activity* sivulle. Tätä tietoa voisi tulevaisuudessa hyödyntää esimerkiksi admin-oikeuksien myöntämisessä muille käyttäjille, katso [kehitysideat](https://github.com/sallamarieini/PollingApp/blob/master/documentation/toteutus.md#kehitysideat).
