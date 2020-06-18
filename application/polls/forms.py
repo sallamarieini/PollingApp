@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, BooleanField
 
 
-# not yet sure what i'm going to do with the description field so the validators are a little odd
 class PollForm(FlaskForm):
     question = StringField("Poll question", [validators.Length(min=3, max=150)])
     description = StringField("Description", [validators.length(min=2, max=150)])
