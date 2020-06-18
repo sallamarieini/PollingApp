@@ -18,9 +18,13 @@ Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyt
 
 [Käyttöohje](/documentation/kayttoohje.md)
 
+[User stories](/documentation/UserStories.md)
+
+[Kuvaus tietokannasta](/documentation/tietokanta.md)
+
 [Tietokantakaavio](/documentation/Dbdiagram.png)
 
-[User stories](/documentation/UserStories.md)
+[Jatkokehitys](/documentation/jatkokehitys.md)
 
 ## Sovellus Herokussa
 
