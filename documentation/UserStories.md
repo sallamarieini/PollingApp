@@ -191,7 +191,7 @@ Lopuksi poistetaan käyttäjä
     DELETE FROM poll WHERE poll.id = ?;
 
 ## Admin-käyttäjänä haluan tarkastella käyttäjien aktiivisuutta.
-Katso [kehitysideat]()
+Katso [kehitysideat](https://github.com/sallamarieini/PollingApp/blob/master/documentation/toteutus.md#kehitysideat)
 
     SELECT account.username, COUNT(users_answered.user_id)
     FROM account
