@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-# for pagination
+# for pagination, items shown per page
 PER_PAGE = 10
 
 # Importing SQLAlchemy
@@ -20,7 +20,7 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///polls.db"
     app.config["SQLALCHEMY_ECHO"] = True
 
-# Creating of db-olio, used for using the database
+# Creating of db, used for using the database
 db = SQLAlchemy(app)
 
 # login
@@ -50,7 +50,6 @@ def login_required(_func=None, *, role="ANY"):
             acceptable_roles = set(("ANY", *current_user.roles()))
 
             if role not in acceptable_roles:
-                # return login_manager.unauthorized()
                 return render_template("no_access.html")
 
             return func(*args, **kwargs)
@@ -64,7 +63,7 @@ def login_required(_func=None, *, role="ANY"):
 from application import views
 
 # Importing models from polls
-from application.polls import models
+from application.polls import poll_models
 # Importing views from polls
 from application.polls import views
 

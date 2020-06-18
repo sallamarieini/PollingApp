@@ -1,9 +1,9 @@
 from application import app, db, login_required, PER_PAGE
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user
-from application.polls.models import Poll, AnswerOption, Answer, UsersAnswered
-from application.polls.forms import PollForm, EditPollForm, SearchForm
-from application.auth.models import User
+from application.polls.poll_models import Poll, UsersAnswered
+from application.polls.answer_models import AnswerOption, Answer
+from application.polls.forms import PollForm, SearchForm
 
 
 @app.route("/")
@@ -15,7 +15,6 @@ def frontpage():
 def polls_index():
     page = request.args.get('page', 1, type=int)
     polls = Poll.query.paginate(page, PER_PAGE, False)
-    # polls = Poll.query.all()
 
     next_url = url_for('polls_index', page=polls.next_num) \
         if polls.has_next else None
@@ -23,7 +22,8 @@ def polls_index():
         if polls.has_prev else None
 
     if len(polls.items) == 0:
-        return render_template("polls/list.html", message="There seems to be no polls. Please create a poll.", word=None)
+        return render_template("polls/list.html", message="There seems to be no polls. Please create a poll.",
+                               word=None)
 
     return render_template("polls/list.html", polls=polls.items, word=None, next_url=next_url, prev_url=prev_url)
 
@@ -108,7 +108,6 @@ def polls_edit(poll_id):
 
         new_options = [option1, option2, option3]
 
-        # return redirect(url_for("polls_index"))
         return render_template("polls/single_poll.html", poll=poll, optionlist=new_options)
 
     return render_template("polls/edit_poll.html", poll=poll, form=PollForm(), option1=option1, option2=option2,
@@ -122,17 +121,13 @@ def single_poll(poll_id):
 
         vote = request.form['options']
 
-        # v = Answer()
         answer_option_id = AnswerOption.query.filter_by(poll_id=poll_id, option=vote).first().id
 
         answer = Answer(answer_option_id, poll_id)
-        # current_user.answered.append(poll)
 
         if current_user.is_authenticated and poll.anonymous == 0:
             user_answered = UsersAnswered(poll.id, current_user.id)
             db.session().add(user_answered)
-        # else:
-        # user_answered = UsersAnswered(poll.id, -1)
 
         db.session().add(answer)
         db.session().commit()
@@ -159,10 +154,6 @@ def single_poll(poll_id):
 @login_required
 def delete_poll(poll_id):
     poll = Poll.query.get(poll_id)
-
-    # if poll.creator_id != current_user.id:
-    #     # show error page
-    #     return render_template("no_access.html")
 
     if int(current_user.id) == int(poll.creator_id) or current_user.admin:
         Answer.query.filter_by(poll_id=poll_id).delete()
@@ -204,11 +195,11 @@ def polls_search_results():
 
     results = Poll.find_poll_by_question("%" + search_word + "%")
 
-    if not results:
+    helper = []
+    for r in results:
+        helper.append(r)
+
+    if not helper:
         return render_template("polls/search.html", form=form, message="No results were found.")
 
-    # polls = []
-    # for poll_id in results:
-    #     polls.append(Poll.query.get(poll_id))
-
-    return render_template("polls/list.html", polls=results, word=search_word)
+    return render_template("polls/list.html", polls=helper, word=search_word)

@@ -2,7 +2,8 @@ from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 from application import app, db, bcrypt, login_required, PER_PAGE
 from application.auth.models import User
-from application.polls.models import Poll, Answer, AnswerOption, UsersAnswered
+from application.polls.poll_models import Poll, UsersAnswered
+from application.polls.answer_models import Answer, AnswerOption
 from application.auth.forms import LoginForm, NewUserForm, EditUsernameForm, EditPasswordForm
 
 
@@ -12,7 +13,6 @@ def auth_login():
         return render_template("auth/loginform.html", form=LoginForm())
 
     form = LoginForm(request.form)
-    # validations
 
     user = User.query.filter_by(username=form.username.data).first()
 
@@ -55,6 +55,7 @@ def auth_create_new_user():
 
     admin = False
 
+    # fisrt user created is admin
     if user_count == 0:
         admin = True
 
@@ -73,7 +74,6 @@ def auth_create_new_user():
 def auth_list():
     page = request.args.get('page', 1, type=int)
     users = User.query.paginate(page, PER_PAGE, False)
-    # users = User.query.all()
 
     next_url = url_for('auth_list', page=users.next_num) \
         if users.has_next else None
@@ -163,7 +163,6 @@ def auth_edit_password(user_id):
 
         updated_password = request.form.get("password")
 
-        # if len(updated_password) != 0:
         pw_hash = bcrypt.generate_password_hash(updated_password).decode('utf-8')
         user.password = pw_hash
 
