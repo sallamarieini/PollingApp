@@ -24,7 +24,7 @@ Sovelluksessa on kaksi käyttäjärymää, tavallinen käyttäjä ja admin käyt
 
 [Tietokantakaavio](/documentation/Dbdiagram.png)
 
-[Jatkokehitys](/documentation/jatkokehitys.md)
+[Toteutus](/documentation/toteutus.md)(sitältää puutteet ja rajoitteet, kehitysideat sekä omat kokemukset)
 
 ## Sovellus Herokussa
 
