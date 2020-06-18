@@ -1,8 +1,11 @@
-# Tietokanta (kesken)
+# Tietokanta
+
+En kokenut tarvetta tehdä abstraktia luokkaa tietokannalle, sillä vain kunkin taulun id toistuu kaikissa tauluissa.
 
 ## CREATE TABLE-lauseet
 
-### Poll
+### poll
+Taulu *poll* sisältää kyselyn kysymyksen, kuvauksen, tiedon kyselyn anonyymiydestä, luomispäivämäärän sekä kyselyn luojan id:n.
 
     CREATE TABLE poll (
 	id INTEGER NOT NULL, 
@@ -17,7 +20,8 @@
     );
 
 
-### Account
+### account
+Taulu *account* sisältää käyttäjään liittyvät tiedot.
 
     CREATE TABLE account (
 	id INTEGER NOT NULL, 
@@ -29,7 +33,8 @@
 	CHECK (admin IN (0, 1))
     );
 
-### Users_answered
+### users_answered
+Taulu *users_answered* sisältää tiedot siitä, mihin kyselyyn kukin (kirjautunut) käyttäjä on jo vastannut.
 
     CREATE TABLE users_answered (
 	id INTEGER NOT NULL, 
@@ -40,7 +45,8 @@
 	FOREIGN KEY(user_id) REFERENCES account (id)
     );
 
-### Answer_option
+### answer_option
+Taulu *answer_option* sisältää kyselyiden vastausvaihtoehdot.
 
     CREATE TABLE answer_option (
 	id INTEGER NOT NULL, 
@@ -50,7 +56,8 @@
 	FOREIGN KEY(poll_id) REFERENCES poll (id)
     );
 
-### Answer
+### answer
+Taulu *answer* sisältää käyttäjien antamat vastaukset kyselyihin.
 
     CREATE TABLE answer (
 	id INTEGER NOT NULL, 
